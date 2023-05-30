@@ -11,23 +11,33 @@ function getComputerChoice() {
     
 };
 
-function playRound(playerSelection, computerSelection) {
-    var result; 
-    if (playerSelection === computerSelection) {
-        result = 'Draw!';
-        console.log(result);
-    } else if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
-               (playerSelection === 'Paper' && computerSelection === 'Rock') ||
-               (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
-                result = 'You win! ' + playerSelection + ' beats ' + computerSelection + ".";
-                console.log(result);
-    } else {
-        result = 'You lose :( ' + computerSelection + ' beats ' + playerSelection + ".";
-        console.log(result);
-    };
-}
+function game(){
 
-const playerSelection = prompt('Please enter your choice:');
-const computerSelection = getComputerChoice();
-playRound(playerSelection, computerSelection);
+    function playRound(playerSelection, computerSelection) {
+        var result; 
+        if (playerSelection === computerSelection) {
+            result = 'Draw!';
+            console.log(result);
+        } else if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
+                   (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+                   (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+                    result = 'You win! ' + playerSelection + ' beats ' + computerSelection + ".";
+                    console.log(result);
+        } else {
+            result = 'You lose :( ' + computerSelection + ' beats ' + playerSelection + ".";
+            console.log(result);
+        };
+    }
+
+    let i = 1;
+
+    while(i <= 5){
+        const playerSelection = prompt('Please enter your choice:');
+        const computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        i++;
+    }
+};
+
+game();
 
