@@ -30,6 +30,20 @@
         /* Adds an event listener that calls the PlayerChoice function 
         every time one of the buttons are clicked*/
         btnOption.forEach((button) => {button.addEventListener('click', playerChoice)});
+
+        // Declare functions that selects a random choice for computer
+        function getComputerChoice() {
+            let randomNumber = Math.floor(Math.random() * 3 + 1);
+    
+            if (randomNumber === 1) {
+                return 'Rock';
+            } else if (randomNumber === 2) {
+                return 'Paper';
+            } else {
+                return 'Scissors';
+            };
+    
+};
     </script>
 </body>
 </html>
