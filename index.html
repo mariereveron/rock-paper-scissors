@@ -5,8 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper & Scissors</title>
-    <script src = "myProgram.js"></script>
 </head>
 <body>
+    <div class = "player-options">
+        <button class = "btn-option" id = "btn-rock">Rock</button>
+        <button class = "btn-option" id = "btn-paper">Paper</button>
+        <button class = "btn-option" id = "btn-scissors">Scissors</button>
+    </div>
+    <script>
+
+        // Initialize Player Selection to an empty string as a placeholder for the selected choice.
+        let playerSelection = ""; 
+
+        //Declare function that will store clicked button on variable
+        function playerChoice(event){
+            /*Extracts the text content of the clicked button.
+            And assigns it to the playerSelection variable.*/
+            playerSelection = event.target.textContent; 
+            console.log('Player selected:' + playerSelection);
+
+        };
+        //Selects all buttons with the btn-option class
+        const btnOption  = document.querySelectorAll('.btn-option');
+        /* Adds an event listener that calls the PlayerChoice function 
+        every time one of the buttons are clicked*/
+        btnOption.forEach((button) => {button.addEventListener('click', playerChoice)});
+    </script>
 </body>
 </html>
