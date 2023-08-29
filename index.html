@@ -5,24 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper & Scissors</title>
+    <link rel ="stylesheet" href = "styles.css">
 </head>
 <body>
     <div class ="container">
         <!--HEADER-->
         <header>
-            <h1>Paper, Rock, Scissors</h1>
-            <h2>Player vs. Computer</h2>
+            <h1>⋆˖⁺‧₊☽ Paper, Rock, Scissors ☾₊‧⁺˖⋆</h1>
+            <h2>⋆⁺ Player vs. Computer⁺ ⋆</h2>
         </header>
 
         <section class ="main">
+            <div class ="score-board"><div class = "user-score"></div><div class = "computer-score"></div></div>
             <!--PLAYER OPTIONS-->
             <div class="player-options">
-                <button class="btn-option" id="btn-rock">Rock</button>
-                <button class="btn-option" id="btn-paper">Paper</button>
-                <button class="btn-option" id="btn-scissors">Scissors</button>
+                <p>Choose your option:</p>
+                <button class="btn-option" id="btn-rock">👊🏻Rock</button>
+                <button class="btn-option" id="btn-paper">✋🏻Paper</button>
+                <button class="btn-option" id="btn-scissors">✌🏻Scissors</button>
             </div>
+            <div class = "game-info"><p>YOU WIN! Paper beats Rock.</p></div>
+            <div class = "play-again"><button class = "reload-game">Play Again</button></div>
         </section>
     </div>
+    <footer>
+        <p>Crafted by <a href ="https://github.com/mariereveron">Marie</a>🫧</p>
+    </footer>
     
     <script>
         // Initialize Player Selection to an empty string as a placeholder for the selected choice.
