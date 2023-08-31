@@ -44,6 +44,49 @@ h2{
     margin: 0;
     padding: 0;
     font-weight: 800;
-    color: #975d9c; 
+    color: #4f5c70; 
+    font-size: 32px;
     text-shadow: 2px 1px 0px rgba(0,0,0,0.13);
+}
+
+.player-options{
+    display: flex;
+    flex-direction: column;
+}
+
+.player-options .buttons {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-between;
+}
+
+.player-options .buttons .btn-option{
+    margin: 10px;
+    background-color: #7f6bdb;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+}
+
+.player-options .buttons .btn-option:hover{
+    background-color: #E5E7EB;
+    color: #7f6bdb;
+    border: none;
+    cursor: pointer;
+}
+
+.player-options p{
+    font-size: 25px;
+    font-weight: 600;
+    color:rgb(68, 68, 68); 
+}
+
+.game-info{
+    display: none;
 }

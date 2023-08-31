@@ -20,11 +20,13 @@
             <!--PLAYER OPTIONS-->
             <div class="player-options">
                 <p>Choose your option:</p>
-                <button class="btn-option" id="btn-rock">👊🏻Rock</button>
-                <button class="btn-option" id="btn-paper">✋🏻Paper</button>
-                <button class="btn-option" id="btn-scissors">✌🏻Scissors</button>
+                <div class = "buttons">
+                    <button class="btn-option" id="btn-rock">Rock</button>
+                    <button class="btn-option" id="btn-paper">Paper</button>
+                    <button class="btn-option" id="btn-scissors">Scissors</button>
+                </div>
             </div>
-            <div class = "game-info"><p>YOU WIN! Paper beats Rock.</p></div>
+            <div class = "game-info" id = "game-result">YOU WIN! Paper beats Rock.</div>
             <div class = "play-again"><button class = "reload-game">Play Again</button></div>
         </section>
     </div>
@@ -75,9 +77,11 @@
     
         // Declare playRound function
         function playRound(playerSelection, computerSelection) {
-            var result; 
-            if (playerSelection === computerSelection) {
-                result = 'Draw!';
+            let result ="";
+            let gameResult = document.querySelector('#game-result');
+            gameResult.style.display = 'block'; 
+            if (playerSelection === computerSelection){
+                result = "DRAW!";
             } else if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
                        (playerSelection === 'Paper' && computerSelection === 'Rock') ||
                        (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
@@ -85,7 +89,7 @@
             } else {
                 result = 'You lose :( ' + computerSelection + ' beats ' + playerSelection + '.';
             }
-            console.log(result);
+            gameResult.textContent = result;
         }
     </script>
     
