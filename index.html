@@ -2,61 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper & Scissors</title>
-    <link rel ="stylesheet" href = "styles.css">
+    <title>⋆˖⁺‧₊☽ Paper, Rock, Scissors ☾₊‧⁺˖⋆</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class ="container">
-        <!--HEADER-->
+    <div class="container">
+        <!-- HEADER -->
         <header>
             <h1>⋆˖⁺‧₊☽ Paper, Rock, Scissors ☾₊‧⁺˖⋆</h1>
             <h2>⋆⁺ Player vs. Computer⁺ ⋆</h2>
         </header>
 
-        <section class ="main">
-            <div class ="score-board"><div class = "user-score"></div><div class = "computer-score"></div></div>
-            <!--PLAYER OPTIONS-->
+        <section class="main">
+            <div class="score-board">
+                <p id="computer-score">Computer: <span id="computer-score-value">00</span></p>
+                <p id="player-score">Player: <span id="player-score-value">00</span></p>
+            </div>
+            <!-- PLAYER OPTIONS -->
             <div class="player-options">
                 <p>Choose your option:</p>
-                <div class = "buttons">
+                <div class="buttons">
                     <button class="btn-option" id="btn-rock">Rock</button>
                     <button class="btn-option" id="btn-paper">Paper</button>
                     <button class="btn-option" id="btn-scissors">Scissors</button>
                 </div>
             </div>
-            <div class = "game-info" id = "game-result">YOU WIN! Paper beats Rock.</div>
-            <div class = "play-again"><button class = "reload-game">Play Again</button></div>
+            <div class="game-info" id="game-result"></div>
+            <div class="final-result" id="final-result" style="display: none;">
+                <h3>Game Over</h3>
+                <p id="final-message">Player Wins!</p>
+            </div>
+            <div class="play-again"><button class="reload-game" id="reset-button">Play Again</button></div>
         </section>
     </div>
     <footer>
-        <p>Crafted by <a href ="https://github.com/mariereveron">Marie</a>🫧</p>
+        <p>Crafted by <a href="https://github.com/mariereveron">Marie</a>🫧</p>
     </footer>
-    
+
     <script>
         // Initialize Player Selection to an empty string as a placeholder for the selected choice.
-        let playerSelection = ""; 
-    
+        let playerSelection = "";
+
         // Declare function that will store clicked button in a variable
         function playerChoice(event) {
             // Extracts the text content of the clicked button and assigns it to the playerSelection variable.
-            playerSelection = event.target.textContent; 
-            // Calls the game function to run the game 
+            playerSelection = event.target.textContent;
+            // Calls the game function to run the game
             game();
         }
-    
+
         // Selects all buttons with the btn-option class
         const btnOption = document.querySelectorAll('.btn-option');
         // Adds an event listener that calls the playerChoice function every time one of the buttons is clicked
         btnOption.forEach((button) => {
             button.addEventListener('click', playerChoice);
         });
-    
+
         // Declare function that selects a random choice for the computer
         function getComputerChoice() {
             let randomNumber = Math.floor(Math.random() * 3 + 1);
-        
+
             if (randomNumber === 1) {
                 return 'Rock';
             } else if (randomNumber === 2) {
@@ -65,33 +71,98 @@
                 return 'Scissors';
             }
         }
-    
+
+        // Initialize player and computer scores and roundsPlayed
+        let playerScore = 0;
+        let computerScore = 0;
+        let roundsPlayed = 0;
+
         // Declare gameplay function
         function game() {
             // Get computer's choice
             const computerSelection = getComputerChoice();
-            
+
             // Call the playRound function with player's selection and computer's selection
             playRound(playerSelection, computerSelection);
         }
-    
-        // Declare playRound function
+
+        // Modify the playRound function to update scores and check for game over
         function playRound(playerSelection, computerSelection) {
-            let result ="";
+            let result = "";
             let gameResult = document.querySelector('#game-result');
-            gameResult.style.display = 'block'; 
-            if (playerSelection === computerSelection){
+            gameResult.style.display = 'flex';
+
+            if (playerSelection === computerSelection) {
                 result = "DRAW!";
             } else if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
-                       (playerSelection === 'Paper' && computerSelection === 'Rock') ||
-                       (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+                (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+                (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
                 result = 'You win! ' + playerSelection + ' beats ' + computerSelection + '.';
+                playerScore++; // Increment player's score
             } else {
                 result = 'You lose :( ' + computerSelection + ' beats ' + playerSelection + '.';
+                computerScore++; // Increment computer's score
             }
+
             gameResult.textContent = result;
+
+            // Update the displayed scores on the scoreboard
+            document.getElementById('player-score-value').textContent = playerScore.toString().padStart(2, '0');
+            document.getElementById('computer-score-value').textContent = computerScore.toString().padStart(2, '0');
+
+            roundsPlayed++;
+
+            // Check if the game is over after 5 rounds
+            if (roundsPlayed === 5) {
+                endGame();
+            }
         }
+
+        // Function to end the game and display the final result
+        function endGame() {
+            let finalResult = document.querySelector('#final-result');
+            finalResult.style.display = 'flex';
+
+            // Determine the final result and message
+            if (playerScore > computerScore) {
+                document.getElementById('final-message').textContent = 'Player Wins!';
+            } else if (computerScore > playerScore) {
+                document.getElementById('final-message').textContent = 'Computer Wins!';
+            } else {
+                document.getElementById('final-message').textContent = 'It\'s a Draw!';
+            }
+
+            // Disable the buttons to prevent further gameplay
+            const btnOption = document.querySelectorAll('.btn-option');
+            btnOption.forEach((button) => {
+                button.disabled = true;
+            });
+
+            // Enable the reset button to play again
+            document.getElementById('reset-button').disabled = false;
+        }
+
+        // Reset the game when the "Play Again" button is clicked
+        document.querySelector('.reload-game').addEventListener('click', () => {
+            playerScore = 0;
+            computerScore = 0;
+            roundsPlayed = 0;
+            document.getElementById('player-score-value').textContent = '00';
+            document.getElementById('computer-score-value').textContent = '00';
+
+              // Clear the game result and hide it
+                let gameResult = document.querySelector('#game-result');
+                gameResult.textContent = '';
+                gameResult.style.display = 'none';
+
+    document.querySelector('#final-result').style.display = 'none';
+
+            // Enable the buttons for gameplay
+            const btnOption = document.querySelectorAll('.btn-option');
+            btnOption.forEach((button) => {
+                button.disabled = false;
+            });
+        });
     </script>
-    
 </body>
 </html>
