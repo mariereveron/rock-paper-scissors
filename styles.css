@@ -143,10 +143,4 @@ h2{
     cursor: pointer;
 }
 
-footer {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: auto; /* Push the footer to the bottom */
-    margin-bottom: 0;
-}
+
